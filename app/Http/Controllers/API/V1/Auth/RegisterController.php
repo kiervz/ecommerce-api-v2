@@ -13,7 +13,7 @@ use App\Models\User;
 
 class RegisterController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         $user = new User();
         $user->username = $request['username'];

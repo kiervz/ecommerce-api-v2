@@ -2,11 +2,9 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use Illuminate\Support\Str;
 
 class RegisterTest extends TestCase
 {
@@ -18,8 +16,8 @@ class RegisterTest extends TestCase
             'username' => $this->faker()->word(10, true),
             'email' => $this->faker()->unique()->safeEmail(),
             'password' => 'password',
+            'password_confirmation' => 'password',
             'role_id' => $role_id,
-            'remember_token' => Str::random(10),
             'firstname' => $this->faker()->firstName(),
             'lastname' => $this->faker()->lastName(),
             'middlename' => $this->faker()->word(5, true),
