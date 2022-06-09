@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -18,5 +19,10 @@ abstract class TestCase extends BaseTestCase
     public function createUser($args = [])
     {
         return User::factory()->create($args);
+    }
+
+    public function createAdmin($args = [])
+    {
+        return Admin::factory()->create($args);
     }
 }
