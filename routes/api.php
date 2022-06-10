@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\Auth\LoginController;
+use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/v1/auth/logout', [LoginController::class, 'logout'])->name('auth.logout');
+    Route::get('/v1/auth/me', function (Request $request) {
+        return new UserResource($request->user());
+    });
 });
 
 Route::post('/v1/auth/login', [LoginController::class, 'login'])->name('auth.login');
