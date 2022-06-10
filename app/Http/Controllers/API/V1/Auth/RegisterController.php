@@ -10,6 +10,7 @@ use App\Models\Admin;
 use App\Models\Customer;
 use App\Models\Seller;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -18,7 +19,7 @@ class RegisterController extends Controller
         $user = new User();
         $user->username = $request['username'];
         $user->email = $request['email'];
-        $user->password = $request['password'];
+        $user->password = Hash::make($request['password']);
         $user->role_id = $request['role_id'];
         $user->save();
 
