@@ -10,11 +10,6 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_if_user_can_login()
     {
         $user = $this->createUser();
@@ -38,5 +33,23 @@ class LoginTest extends TestCase
                     'token'
                 ]
             ]);
+    }
+
+    public function test_if_user_can_logout()
+    {
+        $user = $this->createUser();
+
+        $credentials = [
+            'email' => $user['email'],
+            'password' => 'password'
+        ];
+
+        $data = $this->post(route('auth.login'), $credentials)
+            ->assertSuccessful()
+            ->json();
+
+        $this->post(route('auth.logout'), [], [
+            'Authorization' => "{$data['response']['token_type']} {$data['response']['token']}"
+        ])->assertNoContent();
     }
 }
