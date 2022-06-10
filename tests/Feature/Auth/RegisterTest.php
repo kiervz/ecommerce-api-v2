@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -29,7 +30,7 @@ class RegisterTest extends TestCase
 
     public function test_if_user_can_register_as_admin()
     {
-        $data = $this->userData(1);
+        $data = $this->userData(User::USER_ROLE_ADMIN);
 
         $this->post(route('auth.register'), $data)
             ->assertCreated();
@@ -37,7 +38,7 @@ class RegisterTest extends TestCase
 
     public function test_if_user_can_register_as_seller()
     {
-        $data = $this->userData(2);
+        $data = $this->userData(User::USER_ROLE_SELLER);
 
         $this->post(route('auth.register'), $data)
             ->assertCreated();
@@ -45,7 +46,7 @@ class RegisterTest extends TestCase
 
     public function test_if_user_can_register_as_customer()
     {
-        $data = $this->userData(3);
+        $data = $this->userData(User::USER_ROLE_CUSTOMER);
 
         $this->post(route('auth.register'), $data)
             ->assertCreated();
