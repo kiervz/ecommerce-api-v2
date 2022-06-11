@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->foreignIdFor(User::class, 'user_id');
             $table->foreignIdFor(Segment::class, 'segment_id');
             $table->string('name');
+            $table->string('slug');
             $table->timestamps();
             $table->softDeletes();
         });

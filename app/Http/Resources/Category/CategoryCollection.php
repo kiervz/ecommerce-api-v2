@@ -20,7 +20,8 @@ class CategoryCollection extends ResourceCollection
                     'id' => $request->id,
                     'user' => $request->user->username,
                     'segment' => $request->segment->name,
-                    'name' => $request->name
+                    'name' => $request->name,
+                    'slug' => $request->slug
                 ];
             }),
             'meta' => [
