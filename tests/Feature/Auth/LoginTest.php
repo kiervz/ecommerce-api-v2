@@ -25,7 +25,7 @@ class LoginTest extends TestCase
                 'response' => [
                     'user' => [
                         'id',
-                        'name',
+                        'username',
                         'email',
                         'created_at'
                     ],
