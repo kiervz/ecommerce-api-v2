@@ -14,4 +14,9 @@ class SegmentController extends Controller
 
         return $this->customResponse('result', $segments);
     }
+
+    public function show(Segment $segment)
+    {
+        return $this->customResponse('Segment fetch successfully!', $segment);
+    }
 }

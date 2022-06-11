@@ -39,6 +39,11 @@ abstract class TestCase extends BaseTestCase
 
     public function createSegment($args = [])
     {
+        return Segment::factory()->create($args);
+    }
+
+    public function createSegments($args = [])
+    {
         return Segment::factory(10)->create($args);
     }
 }

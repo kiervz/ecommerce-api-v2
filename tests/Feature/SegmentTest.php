@@ -14,11 +14,23 @@ class SegmentTest extends TestCase
     {
         parent::setUp();
         $this->authUser();
-        $this->createSegment();
     }
-    public function test_if_can_fetch_all_segment()
+
+    public function test_if_can_fetch_all_segments()
     {
-        $this->get(route('segment.ind ex'))
+        $this->createSegments();
+
+        $response = $this->get(route('segment.index'))
+            ->assertSuccessful();
+
+        $response->assertJsonCount(10, 'response');
+    }
+
+    public function test_if_can_fetch_specific_segment()
+    {
+        $segment = $this->createSegment();
+
+        $this->get(route('segment.show', ['segment' => $segment]))
             ->assertSuccessful();
     }
 }
