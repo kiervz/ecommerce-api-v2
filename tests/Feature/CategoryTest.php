@@ -25,7 +25,7 @@ class CategoryTest extends TestCase
         $response = $this->get(route('category.index'))
             ->assertSuccessful();
 
-        $response->assertJsonCount(2, 'response');
+        $response->assertJsonCount(10, 'response');
     }
 
     public function test_fetch_specific_category()

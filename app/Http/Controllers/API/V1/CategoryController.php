@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\CategoryStoreRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;
-use App\Http\Resources\Category\CategoryCollection;
 use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -17,7 +16,7 @@ class CategoryController extends Controller
     {
         $categories = Category::paginate(10);
 
-        return $this->customResponse('results', new CategoryCollection($categories));
+        return $this->customResponse('results', CategoryResource::collection($categories));
     }
 
     public function show(Category $category)
