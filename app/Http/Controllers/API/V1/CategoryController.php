@@ -14,4 +14,9 @@ class CategoryController extends Controller
 
         return $this->customResponse('results', $categories);
     }
+
+    public function show(Category $category)
+    {
+        return $this->customResponse('Category fetch successfully!', $category);
+    }
 }

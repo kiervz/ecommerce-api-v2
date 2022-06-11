@@ -48,6 +48,11 @@ abstract class TestCase extends BaseTestCase
         return Segment::factory(10)->create($args);
     }
 
+    public function createCategory($args = [])
+    {
+        return Category::factory()->create($args);
+    }
+
     public function createCategories($args = [])
     {
         return Category::factory(10)->create($args);
