@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V1\Auth\LoginController;
 use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\Auth\VerificationController;
+use App\Http\Controllers\API\V1\CategoryController;
 use App\Http\Controllers\API\V1\SegmentController;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
@@ -35,5 +36,7 @@ Route::post('/v1/auth/login', [LoginController::class, 'login'])->name('auth.log
 Route::group(['prefix' => 'v1'], function() {
     Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::apiResource('segment', SegmentController::class);
+        Route::get('segment/{segment}/categories', [SegmentController::class, 'getCategoriesBySegment'])->name('segment.getCategoriesBySegment');
+        Route::apiResource('category', CategoryController::class);
     });
 });

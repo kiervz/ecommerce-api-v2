@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Segment;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSegmentsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +15,10 @@ class CreateSegmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('segments', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->foreignIdFor(User::class, 'user_id');
+            $table->foreignIdFor(Segment::class, 'segment_id');
             $table->string('name');
             $table->string('slug');
             $table->timestamps();
@@ -29,6 +33,6 @@ class CreateSegmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('segments');
+        Schema::dropIfExists('categories');
     }
 }

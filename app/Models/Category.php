@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Segment extends Model
+class Category extends Model
 {
     use HasFactory, SoftDeletes, Sluggable;
 
     protected $fillable = [
+        'user_id',
+        'segment_id',
         'name',
         'slug'
     ];
@@ -40,13 +42,13 @@ class Segment extends Model
         return 'slug';
     }
 
-    public function category()
+    public function user()
     {
-        return $this->hasOne(Category::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function categories()
+    public function segment()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Segment::class);
     }
 }
