@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
@@ -28,6 +29,13 @@ class CategoryController extends Controller
             'name' => $request['name']
         ]);
 
-        return $this->customResponse('Category created successfully!', $category);
+        return $this->customResponse('Category created successfully!', $category, Response::HTTP_CREATED);
+    }
+
+    public function update(Category $category, Request $request)
+    {
+        $category->update(['name' => $request['name']]);
+
+        return $this->customResponse('Category updated successfully', $category, Response::HTTP_OK);
     }
 }

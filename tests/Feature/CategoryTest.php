@@ -40,8 +40,17 @@ class CategoryTest extends TestCase
             'user_id' => $this->authUser()->id,
             'segment_id' => $this->createSegment()->id,
             'name' => 'Clothing'
-        ])->assertSuccessful();
+        ])->assertCreated();
 
-        $this->assertDatabaseHas('categories', ['name' => 'Clothing']); 
+        $this->assertDatabaseHas('categories', ['name' => 'Clothing']);
+    }
+
+    public function test_update_category()
+    {
+        $this->put(route('category.update', $this->category), [
+            'name' => 'Shoes'
+        ])->assertOk();
+
+        $this->assertDatabaseHas('categories', ['name' => 'Shoes']);
     }
 }
