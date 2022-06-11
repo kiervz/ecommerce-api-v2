@@ -36,6 +36,13 @@ class CategoryController extends Controller
     {
         $category->update(['name' => $request['name']]);
 
-        return $this->customResponse('Category updated successfully', $category, Response::HTTP_OK);
+        return $this->customResponse('Category updated successfully!', $category, Response::HTTP_OK);
+    }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+
+        return $this->customResponse('Category deleted successfully!', [], Response::HTTP_NO_CONTENT);
     }
 }

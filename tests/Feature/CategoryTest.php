@@ -53,4 +53,12 @@ class CategoryTest extends TestCase
 
         $this->assertDatabaseHas('categories', ['name' => 'Shoes']);
     }
+
+    public function test_delete_category()
+    {
+        $this->delete(route('category.destroy', $this->category->id))
+            ->assertNoContent();
+
+        $this->assertDatabaseHas('categories', ['deleted_at' => now()]);
+    }
 }
