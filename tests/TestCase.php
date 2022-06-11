@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Models\Admin;
+use App\Models\Category;
 use App\Models\Segment;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -45,5 +46,10 @@ abstract class TestCase extends BaseTestCase
     public function createSegments($args = [])
     {
         return Segment::factory(10)->create($args);
+    }
+
+    public function createCategories($args = [])
+    {
+        return Category::factory(10)->create($args);
     }
 }
