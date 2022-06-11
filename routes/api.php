@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V1\Auth\LoginController;
 use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\Auth\VerificationController;
+use App\Http\Controllers\API\V1\SegmentController;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('/v1/auth/register', [RegisterController::class, 'register'])->name('auth.register');
 Route::post('/v1/auth/login', [LoginController::class, 'login'])->name('auth.login');
+
+Route::group(['prefix' => 'v1'], function() {
+    Route::group(['middleware' => 'auth:sanctum'], function() {
+        Route::apiResource('segment', SegmentController::class);
+    });
+});
