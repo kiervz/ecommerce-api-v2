@@ -18,6 +18,7 @@ class Segment extends Model
     {
         return $this->hasOne(Category::class);
     }
+
     public function categories()
     {
         return $this->hasMany(Category::class);

@@ -36,7 +36,7 @@ class CategoryTest extends TestCase
 
     public function test_create_category()
     {
-        $response = $this->post(route('category.store'), [
+        $this->post(route('category.store'), [
             'user_id' => $this->authUser()->id,
             'segment_id' => $this->createSegment()->id,
             'name' => 'Clothing'
@@ -56,7 +56,7 @@ class CategoryTest extends TestCase
 
     public function test_delete_category()
     {
-        $this->delete(route('category.destroy', $this->category->id))
+        $this->delete(route('category.destroy', $this->category->slug))
             ->assertNoContent();
 
         $this->assertDatabaseHas('categories', ['deleted_at' => now()]);
