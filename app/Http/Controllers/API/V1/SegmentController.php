@@ -32,10 +32,17 @@ class SegmentController extends Controller
 
     public function update(Segment $segment, Request $request)
     {
-        $segment = $segment->update([
+        $segment->update([
             'name' => $request['name']
         ]);
 
         return $this->customResponse('Segment updated successfully!', $segment, Response::HTTP_OK);
+    }
+
+    public function destroy(Segment $segment)
+    {
+        $segment->delete();
+
+        return $this->customResponse('Segment deleted successfully!', [], Response::HTTP_NO_CONTENT);
     }
 }

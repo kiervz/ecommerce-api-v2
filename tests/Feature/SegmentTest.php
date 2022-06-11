@@ -52,4 +52,12 @@ class SegmentTest extends TestCase
 
         $this->assertDatabaseHas('segments', ['name' => 'Women']);
     }
+
+    public function test_if_can_delete_segment()
+    {
+        $this->delete(route('segment.destroy', $this->segment->id))
+            ->assertNoContent();
+
+        $this->assertDatabaseHas('segments', ['deleted_at' => now()]);
+    }
 }
