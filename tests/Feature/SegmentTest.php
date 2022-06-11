@@ -10,10 +10,13 @@ class SegmentTest extends TestCase
 {
     use RefreshDatabase;
 
+    private $segment;
+
     public function setUp(): void
     {
         parent::setUp();
         $this->authUser();
+        $this->segment = $this->createSegment();
     }
 
     public function test_if_can_fetch_all_segments()
@@ -28,9 +31,7 @@ class SegmentTest extends TestCase
 
     public function test_if_can_fetch_specific_segment()
     {
-        $segment = $this->createSegment();
-
-        $this->get(route('segment.show', ['segment' => $segment]))
+        $this->get(route('segment.show', ['segment' => $this->segment]))
             ->assertSuccessful();
     }
 
@@ -41,5 +42,14 @@ class SegmentTest extends TestCase
         ])->assertCreated();
 
         $this->assertDatabaseHas('segments', ['name' => 'Kids']);
+    }
+
+    public function test_if_can_update_segment()
+    {
+        $this->put(route('segment.update', ['segment' => $this->segment]), [
+            'name' => 'Women'
+        ])->assertOk();
+
+        $this->assertDatabaseHas('segments', ['name' => 'Women']);
     }
 }

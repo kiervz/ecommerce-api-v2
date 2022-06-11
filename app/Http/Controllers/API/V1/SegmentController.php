@@ -29,4 +29,13 @@ class SegmentController extends Controller
 
         return $this->customResponse('Segment fetch successfully!', $segment, Response::HTTP_CREATED);
     }
+
+    public function update(Segment $segment, Request $request)
+    {
+        $segment = $segment->update([
+            'name' => $request['name']
+        ]);
+
+        return $this->customResponse('Segment updated successfully!', $segment, Response::HTTP_OK);
+    }
 }
