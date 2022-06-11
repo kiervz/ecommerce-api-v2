@@ -33,4 +33,13 @@ class SegmentTest extends TestCase
         $this->get(route('segment.show', ['segment' => $segment]))
             ->assertSuccessful();
     }
+
+    public function test_if_can_create_segment()
+    {
+        $this->post(route('segment.store'), [
+            'name' => 'Kids'
+        ])->assertCreated();
+
+        $this->assertDatabaseHas('segments', ['name' => 'Kids']);
+    }
 }
