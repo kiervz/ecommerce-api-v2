@@ -33,4 +33,15 @@ class CategoryTest extends TestCase
         $this->get(route('category.show', $this->category))
             ->assertSuccessful();
     }
+
+    public function test_create_category()
+    {
+        $response = $this->post(route('category.store'), [
+            'user_id' => $this->authUser()->id,
+            'segment_id' => $this->createSegment()->id,
+            'name' => 'Clothing'
+        ])->assertSuccessful();
+
+        $this->assertDatabaseHas('categories', ['name' => 'Clothing']); 
+    }
 }

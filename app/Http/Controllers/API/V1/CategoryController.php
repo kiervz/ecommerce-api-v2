@@ -19,4 +19,15 @@ class CategoryController extends Controller
     {
         return $this->customResponse('Category fetch successfully!', $category);
     }
+
+    public function store(Request $request)
+    {
+        $category = Category::create([
+            'user_id' => $request['user_id'],
+            'segment_id' => $request['segment_id'],
+            'name' => $request['name']
+        ]);
+
+        return $this->customResponse('Category created successfully!', $category);
+    }
 }
