@@ -26,7 +26,7 @@ class SegmentTest extends TestCase
         $response = $this->get(route('segment.index'))
             ->assertSuccessful();
 
-        $response->assertJsonCount(10, 'response');
+        $response->assertJsonCount(11, 'response');
     }
 
     public function test_if_can_fetch_specific_segment()
@@ -55,7 +55,7 @@ class SegmentTest extends TestCase
 
     public function test_if_can_delete_segment()
     {
-        $this->delete(route('segment.destroy', $this->segment->id))
+        $this->delete(route('segment.destroy', $this->segment->slug))
             ->assertNoContent();
 
         $this->assertDatabaseHas('segments', ['deleted_at' => now()]);
