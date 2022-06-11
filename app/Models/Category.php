@@ -15,4 +15,14 @@ class Category extends Model
         'segment_id',
         'name'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function segment()
+    {
+        return $this->belongsTo(Segment::class);
+    }
 }

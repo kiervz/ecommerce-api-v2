@@ -13,4 +13,13 @@ class Segment extends Model
     protected $fillable = [
         "name"
     ];
+
+    public function category()
+    {
+        return $this->hasOne(Category::class);
+    }
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

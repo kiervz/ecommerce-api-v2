@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\CategoryStoreRequest;
+use App\Http\Requests\Category\CategoryUpdateRequest;
+use App\Http\Resources\Category\CategoryCollection;
+use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -11,32 +15,28 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
 
-        return $this->customResponse('results', $categories);
+        return $this->customResponse('results', new CategoryCollection($categories));
     }
 
     public function show(Category $category)
     {
-        return $this->customResponse('Category fetch successfully!', $category);
+        return $this->customResponse('Category fetch successfully!', new CategoryResource($category));
     }
 
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
-        $category = Category::create([
-            'user_id' => $request['user_id'],
-            'segment_id' => $request['segment_id'],
-            'name' => $request['name']
-        ]);
+        $category = Category::create($request->validated());
 
-        return $this->customResponse('Category created successfully!', $category, Response::HTTP_CREATED);
+        return $this->customResponse('Category created successfully!', new CategoryResource($category), Response::HTTP_CREATED);
     }
 
-    public function update(Category $category, Request $request)
+    public function update(Category $category, CategoryUpdateRequest $request)
     {
-        $category->update(['name' => $request['name']]);
+        $category->update($request->validated());
 
-        return $this->customResponse('Category updated successfully!', $category, Response::HTTP_OK);
+        return $this->customResponse('Category updated successfully!',new CategoryResource($category), Response::HTTP_OK);
     }
 
     public function destroy(Category $category)
