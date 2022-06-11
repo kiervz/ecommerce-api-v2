@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Category\CategoryResource;
 use App\Models\Segment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -44,5 +45,10 @@ class SegmentController extends Controller
         $segment->delete();
 
         return $this->customResponse('Segment deleted successfully!', [], Response::HTTP_NO_CONTENT);
+    }
+
+    public function getCategoriesBySegment(Segment $segment)
+    {
+        return $this->customResponse('Categories by segment fetch successfully!', CategoryResource::collection($segment->categories));
     }
 }

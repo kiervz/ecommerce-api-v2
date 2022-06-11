@@ -60,4 +60,10 @@ class SegmentTest extends TestCase
 
         $this->assertDatabaseHas('segments', ['deleted_at' => now()]);
     }
+
+    public function test_if_can_get_categories_by_segment_name()
+    {
+        $this->get(route('segment.getCategoriesBySegment', $this->segment->slug))
+            ->assertSuccessful();
+    }
 }

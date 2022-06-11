@@ -36,6 +36,7 @@ Route::post('/v1/auth/login', [LoginController::class, 'login'])->name('auth.log
 Route::group(['prefix' => 'v1'], function() {
     Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::apiResource('segment', SegmentController::class);
+        Route::get('segment/{segment}/categories', [SegmentController::class, 'getCategoriesBySegment'])->name('segment.getCategoriesBySegment');
         Route::apiResource('category', CategoryController::class);
     });
 });
