@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SubCategory\SubCategoryResource;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,6 @@ class SubCategoryController extends Controller
     {
         $sub_categories = SubCategory::all();
 
-        return $this->customResponse('results', $sub_categories);
+        return $this->customResponse('results', SubCategoryResource::collection($sub_categories));
     }
 }
