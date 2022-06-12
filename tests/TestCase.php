@@ -5,6 +5,7 @@ namespace Tests;
 use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Segment;
+use App\Models\SubCategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Laravel\Sanctum\Sanctum;
@@ -56,5 +57,15 @@ abstract class TestCase extends BaseTestCase
     public function createCategories($args = [])
     {
         return Category::factory(10)->create($args);
+    }
+
+    public function createSubCategory($args = [])
+    {
+        return SubCategory::factory()->create($args);
+    }
+
+    public function createSubCategories($total)
+    {
+        return SubCategory::factory($total)->create();
     }
 }
