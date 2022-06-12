@@ -39,6 +39,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::apiResource('segment', SegmentController::class);
         Route::get('segment/{segment}/categories', [SegmentController::class, 'getCategoriesBySegment'])->name('segment.getCategoriesBySegment');
         Route::apiResource('category', CategoryController::class);
+        Route::get('category/{category}/sub-categories', [CategoryController::class, 'getSubCategoriesByCategory'])->name('category.getSubCategoriesByCategory');
         Route::apiResource('sub-category', SubCategoryController::class);
     });
 });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\CategoryStoreRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\SubCategory\SubCategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -43,5 +44,10 @@ class CategoryController extends Controller
         $category->delete();
 
         return $this->customResponse('Category deleted successfully!', [], Response::HTTP_NO_CONTENT);
+    }
+
+    public function getSubCategoriesByCategory(Category $category)
+    {
+        return $this->customResponse('fetched successfully', SubCategoryResource::collection($category->subCategories));
     }
 }

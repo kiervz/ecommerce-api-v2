@@ -51,4 +51,9 @@ class Category extends Model
     {
         return $this->belongsTo(Segment::class);
     }
+
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
 }
