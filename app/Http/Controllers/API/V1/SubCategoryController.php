@@ -15,4 +15,9 @@ class SubCategoryController extends Controller
 
         return $this->customResponse('results', SubCategoryResource::collection($sub_categories));
     }
+
+    public function show(SubCategory $sub_category)
+    {
+        return $this->customResponse('fetched successfully!', new SubCategoryResource($sub_category));
+    }
 }
