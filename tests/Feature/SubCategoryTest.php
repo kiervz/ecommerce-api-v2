@@ -45,4 +45,13 @@ class SubCategoryTest extends TestCase
 
         $this->assertDatabaseHas('sub_categories', ['name' => 'Sneakers']);
     }
+
+    public function test_update_sub_category()
+    {
+        $this->put(route('sub-category.update', $this->sub_category), [
+            'name' => 'Sneakers (Updated)'
+        ])->assertOk();
+
+        $this->assertDatabaseHas('sub_categories', ['name' => 'Sneakers (Updated)']);
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubCategory\SubCategoryStoreRequest;
+use App\Http\Requests\SubCategoryUpdateRequest;
 use App\Http\Resources\SubCategory\SubCategoryResource;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -28,5 +29,12 @@ class SubCategoryController extends Controller
         $sub_category = SubCategory::create($request->validated());
 
         return $this->customResponse('created successfully!', new SubCategoryResource($sub_category), Response::HTTP_CREATED);
+    }
+
+    public function update(SubCategory $sub_category, SubCategoryUpdateRequest $request)
+    {
+        $sub_category->update($request->validated());
+
+        return $this->customResponse('updated successfully!', new SubCategoryResource($sub_category), Response::HTTP_OK);
     }
 }
