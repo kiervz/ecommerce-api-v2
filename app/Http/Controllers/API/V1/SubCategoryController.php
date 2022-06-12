@@ -37,4 +37,11 @@ class SubCategoryController extends Controller
 
         return $this->customResponse('updated successfully!', new SubCategoryResource($sub_category), Response::HTTP_OK);
     }
+
+    public function destroy(SubCategory $sub_category)
+    {
+        $sub_category->delete();
+
+        return $this->customResponse('deleted successfully!', [], Response::HTTP_NO_CONTENT);
+    }
 }

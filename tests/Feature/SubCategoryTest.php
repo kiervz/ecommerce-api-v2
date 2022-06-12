@@ -54,4 +54,12 @@ class SubCategoryTest extends TestCase
 
         $this->assertDatabaseHas('sub_categories', ['name' => 'Sneakers (Updated)']);
     }
+
+    public function test_delete_sub_category()
+    {
+        $this->delete(route('sub-category.destroy', $this->sub_category))
+            ->assertNoContent(); 
+
+        $this->assertDatabaseMissing('sub_categories', ['deleted_at' => now()]);
+    }
 }
