@@ -34,4 +34,15 @@ class SubCategoryTest extends TestCase
         $this->get(route('sub-category.show', $this->sub_category))
             ->assertSuccessful();
     }
+
+    public function test_create_sub_category()
+    {
+        $this->post(route('sub-category.store'), [
+            'user_id' => $this->authUser()->id,
+            'category_id' => $this->createCategory()->id,
+            'name' => 'Sneakers'
+        ])->assertCreated();
+
+        $this->assertDatabaseHas('sub_categories', ['name' => 'Sneakers']);
+    }
 }
