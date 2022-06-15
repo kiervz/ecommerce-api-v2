@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V1\Auth\LoginController;
 use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\Auth\VerificationController;
+use App\Http\Controllers\API\V1\BrandController;
 use App\Http\Controllers\API\V1\CategoryController;
 use App\Http\Controllers\API\V1\SegmentController;
 use App\Http\Controllers\API\V1\SubCategoryController;
@@ -41,5 +42,6 @@ Route::group(['prefix' => 'v1'], function() {
         Route::apiResource('category', CategoryController::class);
         Route::get('category/{category}/sub-categories', [CategoryController::class, 'getSubCategoriesByCategory'])->name('category.getSubCategoriesByCategory');
         Route::apiResource('sub-category', SubCategoryController::class);
+        Route::apiResource('brand', BrandController::class);
     });
 });
