@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Models\Admin;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Segment;
 use App\Models\SubCategory;
@@ -67,5 +68,15 @@ abstract class TestCase extends BaseTestCase
     public function createSubCategories($total)
     {
         return SubCategory::factory($total)->create();
+    }
+
+    public function createBrand($args = [])
+    {
+        return Brand::factory()->create($args);
+    }
+
+    public function createBrands($total)
+    {
+        return Brand::factory($total)->create();
     }
 }
