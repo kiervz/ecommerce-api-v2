@@ -61,4 +61,10 @@ class CategoryTest extends TestCase
 
         $this->assertDatabaseHas('categories', ['deleted_at' => now()]);
     }
+
+    public function test_fetch_all_sub_categories_by_category()
+    {
+        $this->get(route('category.getSubCategoriesByCategory', $this->category->slug))
+            ->assertSuccessful();
+    }
 }

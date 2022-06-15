@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Cviebrock\EloquentSluggable\Sluggable;
 
-class Category extends Model
+class SubCategory extends Model
 {
-    use HasFactory, SoftDeletes, Sluggable;
+    use HasFactory, Sluggable;
 
     protected $fillable = [
         'user_id',
-        'segment_id',
+        'category_id',
         'name',
         'slug'
     ];
@@ -47,13 +46,8 @@ class Category extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function segment()
+    public function category()
     {
-        return $this->belongsTo(Segment::class);
-    }
-
-    public function subCategories()
-    {
-        return $this->hasMany(SubCategory::class);
+        return $this->belongsTo(Category::class);
     }
 }

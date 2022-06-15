@@ -5,6 +5,7 @@ use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\Auth\VerificationController;
 use App\Http\Controllers\API\V1\CategoryController;
 use App\Http\Controllers\API\V1\SegmentController;
+use App\Http\Controllers\API\V1\SubCategoryController;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,5 +39,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::apiResource('segment', SegmentController::class);
         Route::get('segment/{segment}/categories', [SegmentController::class, 'getCategoriesBySegment'])->name('segment.getCategoriesBySegment');
         Route::apiResource('category', CategoryController::class);
+        Route::get('category/{category}/sub-categories', [CategoryController::class, 'getSubCategoriesByCategory'])->name('category.getSubCategoriesByCategory');
+        Route::apiResource('sub-category', SubCategoryController::class);
     });
 });
