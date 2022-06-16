@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Brand\BrandStoreRequest;
+use App\Http\Requests\Brand\BrandUpdateRequest;
 use App\Http\Resources\Brand\BrandCollection;
 use App\Http\Resources\Brand\BrandResource;
 use App\Models\Brand;
@@ -29,6 +30,14 @@ class BrandController extends Controller
         $brand = Brand::create($request->all());
 
         return $this->customResponse('Brand created successfully!', new BrandResource($brand), Response::HTTP_CREATED);
+    }
+
+    public function update(Brand $brand, BrandUpdateRequest $request)
+    {
+        $brand->slug = null;
+        $brand->update($request->validated());
+
+        return $this->customResponse('Brand updated successfully!', new BrandResource($brand), Response::HTTP_OK);
     }
 
 }

@@ -32,7 +32,7 @@ class BrandTest extends TestCase
         $this->get(route('brand.show', $this->brand))->assertSuccessful();
     }
 
-    public function  test_can_store_brand()
+    public function test_can_store_brand()
     {
         $this->post(route('brand.store'), [
             'user_id' => $this->authUser()->id,
@@ -40,5 +40,14 @@ class BrandTest extends TestCase
         ])->assertCreated();
 
         $this->assertDatabaseHas('brands', ['name' => 'Nike']);
+    }
+
+    public function test_can_update_brand()
+    {
+        $this->put(route('brand.update', $this->brand), [
+            'name' => 'Hello Brand'
+        ])->assertOk();
+
+        $this->assertDatabaseHas('brands', ['name' => 'Hello Brand']);
     }
 }
