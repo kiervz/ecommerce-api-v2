@@ -10,11 +10,14 @@ class BrandTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $brand;
+
     public function setUp(): void
     {
         parent::setUp();
         $this->authUser();
         $this->createBrands(10);
+        $this->brand = $this->createBrand();
     }
 
     public function test_can_fetch_all_brands()
@@ -22,6 +25,11 @@ class BrandTest extends TestCase
         $this->get(route('brand.index'))->assertSuccessful();
 
         $this->assertDatabaseCount('brands', 10);
+    }
+
+    public function test_can_fetch_specific_brand_by_slug()
+    {
+        $this->get(route('brand.show', $this->brand))->assertSuccessful();
     }
 
     public function  test_can_store_brand()
