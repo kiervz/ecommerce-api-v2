@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubCategory\SubCategoryStoreRequest;
-use App\Http\Requests\SubCategoryUpdateRequest;
+use App\Http\Requests\SubCategory\SubCategoryUpdateRequest;
 use App\Http\Resources\SubCategory\SubCategoryResource;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
