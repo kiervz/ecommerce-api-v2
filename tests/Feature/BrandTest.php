@@ -50,4 +50,12 @@ class BrandTest extends TestCase
 
         $this->assertDatabaseHas('brands', ['name' => 'Hello Brand']);
     }
+
+    public function test_can_delete_brand()
+    {
+        $this->delete(route('brand.destroy', $this->brand))
+            ->assertNoContent();
+
+        $this->assertDatabaseHas('brands', ['deleted_at' => now()]);
+    }
 }

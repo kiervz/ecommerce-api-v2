@@ -40,4 +40,11 @@ class BrandController extends Controller
         return $this->customResponse('Brand updated successfully!', new BrandResource($brand), Response::HTTP_OK);
     }
 
+    public function destroy(Brand $brand)
+    {
+        $brand->delete();
+
+        return $this->customResponse('Brand deleted successfully!', [], Response::HTTP_NO_CONTENT);
+    }
+
 }
