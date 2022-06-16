@@ -23,4 +23,14 @@ class BrandTest extends TestCase
 
         $this->assertDatabaseCount('brands', 10);
     }
+
+    public function  test_can_store_brand()
+    {
+        $this->post(route('brand.store'), [
+            'user_id' => $this->authUser()->id,
+            'name' => 'Nike'
+        ])->assertCreated();
+
+        $this->assertDatabaseHas('brands', ['name' => 'Nike']);
+    }
 }
