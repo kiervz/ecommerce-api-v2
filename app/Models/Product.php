@@ -55,4 +55,29 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    public function segment()
+    {
+        return $this->belongsTo(Segment::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class);
+    }
+
+    public function seller()
+    {
+        return $this->hasOne(Seller::class, 'id', 'seller_id');
+    }
+
+    public function brand()
+    {
+        return $this->hasOne(Brand::class, 'id', 'brand_id');
+    }
 }
