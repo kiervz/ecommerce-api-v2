@@ -8,14 +8,19 @@ use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Http\Resources\Product\ProductCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
-
-use Auth;
 
 class ProductController extends Controller
 {
+    protected $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
     public function index()
     {
         $products = Product::paginate(30);
@@ -30,21 +35,7 @@ class ProductController extends Controller
 
     public function store(ProductStoreRequest $request)
     {
-        $product = Product::create($request->validated());
-
-        foreach ($request['product_images'] as $item) {
-            $extension = $item->getClientOriginalExtension();
-
-            $new_img_name = Auth::id() . rand(0, 100) . time() . '.' . $extension;
-
-            $old_img_name = Storage::disk('public')->put('/', $item);
-
-            Storage::move('public/'.$old_img_name, $new_img_name);
-
-            $product->productImages()->create([
-                'name' => $new_img_name
-            ]);
-        }
+        $product = $this->productService->createProduct($request);
 
         return $this->customResponse('Product created successfully!', new ProductResource($product), Response::HTTP_CREATED);
     }
