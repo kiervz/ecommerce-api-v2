@@ -24,6 +24,7 @@ class ProductCollection extends ResourceCollection
                     'subCategory' => $request->subCategory->name,
                     'sku' => $request->sku,
                     'name' => $request->name,
+                    'slug' => $request->slug,
                     'unit_price' => number_format($request->unit_price, 2),
                     'discount' => number_format($request->discount, 2),
                     'actual_price' => number_format($request->actual_price, 2),

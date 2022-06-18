@@ -52,4 +52,24 @@ class ProductTest extends TestCase
 
         $this->assertDatabaseHas('products', ['name' => 'New Balance 411 V2 Performance Shoes']);
     }
+
+    public function test_update_product()
+    {
+        $this->put(route('product.update', $this->product), [
+            "sku" => "4B8BDSH1259CFD12",
+            "name" => "New Balance 411 V2 Performance Shoes v2",
+            "unit_price" => 3425.00,
+            "discount" => 0,
+            "actual_price" => 3425.00,
+            "stock" => 100,
+            "description" => "Sample Descriptio",
+            "seller_id" => 1,
+            "brand_id" => 1,
+            "segment_id" => 2,
+            "category_id" => 2,
+            "sub_category_id" => 1
+        ])->assertOk();
+
+        $this->assertDatabaseHas('products', ['name' => 'New Balance 411 V2 Performance Shoes v2']);
+    }
 }
