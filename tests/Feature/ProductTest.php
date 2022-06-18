@@ -72,4 +72,12 @@ class ProductTest extends TestCase
 
         $this->assertDatabaseHas('products', ['name' => 'New Balance 411 V2 Performance Shoes v2']);
     }
+
+    public function test_delete_product()
+    {
+        $this->delete(route('product.destroy', $this->product->slug))
+            ->assertNoContent();
+
+        $this->assertDatabaseHas('products', ['deleted_at' => now()]);
+    }
 }

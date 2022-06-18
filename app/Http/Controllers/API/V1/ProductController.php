@@ -38,4 +38,11 @@ class ProductController extends Controller
 
         return $this->customResponse('Product updated successfully!', new ProductResource($product), Response::HTTP_OK);
     }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return $this->customResponse('Product deleted successfully!', [], Response::HTTP_NO_CONTENT);
+    }
 }
