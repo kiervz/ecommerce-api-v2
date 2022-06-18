@@ -50,4 +50,9 @@ class Product extends Model
     {
         return 'slug';
     }
+
+    public function productImages()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 }
