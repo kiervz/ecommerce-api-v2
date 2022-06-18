@@ -15,4 +15,9 @@ class ProductController extends Controller
 
         return $this->customResponse('results', new ProductCollection($products));
     }
+
+    public function show(Product $product)
+    {
+        return $this->customResponse('Product fetch successfully!', $product);
+    }
 }
