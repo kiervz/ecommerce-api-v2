@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Product;
 
+use App\Http\Resources\ProductImage\ProductImageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -28,7 +29,7 @@ class ProductResource extends JsonResource
             'actual_price' => number_format($this->actual_price, 2),
             'stock' => $this->stock,
             'description' => $this->description,
-            'productImages' => $this->productImages
+            'productImages' => ProductImageResource::collection($this->productImages)
         ];
     }
 }

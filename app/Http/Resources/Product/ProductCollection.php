@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Product;
 
+use App\Http\Resources\ProductImage\ProductImageResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProductCollection extends ResourceCollection
@@ -30,7 +31,7 @@ class ProductCollection extends ResourceCollection
                     'actual_price' => number_format($request->actual_price, 2),
                     'stock' => $request->stock,
                     'description' => $request->description,
-                    'productImages' => $request->productImages
+                    'productImages' => ProductImageResource::collection($request->productImages)
                 ];
             }),
             'meta' => [
