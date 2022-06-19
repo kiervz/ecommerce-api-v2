@@ -15,6 +15,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public const USER_ROLE_ADMIN = 1;
     public const USER_ROLE_SELLER = 2;
     public const USER_ROLE_CUSTOMER = 3;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -47,4 +48,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function seller()
+    {
+        return $this->hasOne(Seller::class);
+    }
 }
