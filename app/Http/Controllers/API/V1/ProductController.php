@@ -21,9 +21,12 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(30);
+        $sort = $request->get('sort');
+        $search = $request->get('q');
+
+        $products = $this->productService->showProducts($sort, $search);
 
         return $this->customResponse('results', new ProductCollection($products));
     }
