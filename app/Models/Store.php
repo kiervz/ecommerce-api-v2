@@ -42,4 +42,9 @@ class Store extends Model
     {
         return 'slug';
     }
+
+    public function seller()
+    {
+        return $this->hasOne(Seller::class, 'id', 'seller_id');
+    }
 }

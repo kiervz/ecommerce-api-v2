@@ -22,9 +22,7 @@ class StoreFactory extends Factory
         $slug = Str::slug($name);
 
         return [
-            'seller_id' => function() {
-                return Seller::factory()->create()->id;
-            },
+            'seller_id' => $this->faker->randomDigitNotZero(),
             'name' => $name,
             'slug' => $slug,
             'bio' => $this->faker->text(100),
