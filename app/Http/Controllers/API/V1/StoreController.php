@@ -37,4 +37,11 @@ class StoreController extends Controller
 
         return $this->customResponse('Store updated successfully!', new StoreResource($store), Response::HTTP_OK);
     }
+
+    public function destroy(Store $store)
+    {
+        $store->delete();
+
+        return $this->customResponse('Store deleted successfully!', [], Response::HTTP_NO_CONTENT);
+    }
 }

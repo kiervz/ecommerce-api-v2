@@ -56,4 +56,12 @@ class StoreTest extends TestCase
 
         $this->assertDatabaseHas('stores', ['name' => 'Apple Inc.']);
     }
+
+    public function test_can_delete_store()
+    {
+        $this->delete(route('store.destroy', $this->store->slug))
+            ->assertNoContent();
+
+        $this->assertDatabaseHas('stores', ['deleted_at' => now()]);
+    }
 }
