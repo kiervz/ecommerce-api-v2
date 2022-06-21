@@ -14,4 +14,9 @@ class StoreController extends Controller
 
         $this->customResponse('fetched all stores', $stores);
     }
+
+    public function show(Store $store)
+    {
+        return $this->customResponse('Store fetch successfully!', $store);
+    }
 }
