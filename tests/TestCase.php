@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Segment;
+use App\Models\Seller;
 use App\Models\Store;
 use App\Models\SubCategory;
 use App\Models\User;
@@ -100,5 +101,15 @@ abstract class TestCase extends BaseTestCase
     public function createStores($total)
     {
         return Store::factory($total)->create();
+    }
+
+    public function createSeller($args = [])
+    {
+        return Seller::factory()->create($args);
+    }
+
+    public function createSellers($total)
+    {
+        return Seller::factory($total)->create();
     }
 }

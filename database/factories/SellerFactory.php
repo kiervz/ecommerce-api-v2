@@ -22,9 +22,6 @@ class SellerFactory extends Factory
             'user_id' => function() {
                 return User::factory()->create()->id;
             },
-            'store_id' => function() {
-                return Store::factory()->create()->id;
-            },
             'firstname' => $this->faker->word(10, true),
             'middlename' => $this->faker->word(10, true),
             'lastname' => $this->faker->word(10, true),

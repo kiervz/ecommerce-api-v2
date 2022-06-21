@@ -32,4 +32,16 @@ class StoreTest extends TestCase
         $this->get(route('store.show', ['store' => $this->store]))
             ->assertSuccessful();
     }
+
+    public function test_if_can_create_store()
+    {
+        $this->post(route('store.store'), [
+            'seller_id' => $this->createSeller()->id,
+            'name' => 'Microsoft',
+            'bio' => 'sample bio',
+            'last_log' => now()
+        ])->assertCreated();
+
+        $this->assertDatabaseHas('stores', ['name' => 'Microsoft']);
+    }
 }
