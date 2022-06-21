@@ -44,4 +44,16 @@ class StoreTest extends TestCase
 
         $this->assertDatabaseHas('stores', ['name' => 'Microsoft']);
     }
+
+    public function test_can_update_store()
+    {
+        $this->put(route('store.update', ['store' => $this->store]), [
+            'seller_id' => $this->createSeller()->id,
+            'name' => 'Apple Inc.',
+            'bio' => 'sample bio',
+            'last_log' => now()
+        ])->assertOk();
+
+        $this->assertDatabaseHas('stores', ['name' => 'Apple Inc.']);
+    }
 }

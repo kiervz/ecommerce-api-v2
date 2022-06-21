@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Store\StoreStoreRequest;
+use App\Http\Requests\Store\StoreUpdateRequest;
 use App\Http\Resources\Store\StoreResource;
 use App\Models\Store;
 use Illuminate\Http\Request;
@@ -28,5 +29,12 @@ class StoreController extends Controller
         $store = Store::create($request->validated());
 
         return $this->customResponse('Store created successfully!', new StoreResource($store), Response::HTTP_CREATED);
+    }
+
+    public function update(Store $store, StoreUpdateRequest $request)
+    {
+        $store->update($request->validated());
+
+        return $this->customResponse('Store updated successfully!', new StoreResource($store), Response::HTTP_OK);
     }
 }
