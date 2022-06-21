@@ -24,7 +24,7 @@ class ProductTest extends TestCase
         $this->createProducts(10);
         $this->get(route('product.index'))->assertSuccessful();
 
-        $this->assertDatabaseCount('products', 10);
+        $this->assertDatabaseCount('products', 11);
     }
 
     public function test_fetch_specific_product()
@@ -47,7 +47,8 @@ class ProductTest extends TestCase
             "brand_id" => 1,
             "segment_id" => 2,
             "category_id" => 2,
-            "sub_category_id" => 1
+            "sub_category_id" => 1,
+            "product_images" => []
         ])->assertCreated();
 
         $this->assertDatabaseHas('products', ['name' => 'New Balance 411 V2 Performance Shoes']);
