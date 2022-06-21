@@ -24,7 +24,7 @@ class BrandTest extends TestCase
     {
         $this->get(route('brand.index'))->assertSuccessful();
 
-        $this->assertDatabaseCount('brands', 10);
+        $this->assertDatabaseCount('brands', 11);
     }
 
     public function test_can_fetch_specific_brand_by_slug()
