@@ -10,13 +10,11 @@ use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-use Auth;
-
 class StoreController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('isSeller', ['only' => 'store']);
+        $this->middleware(['isSeller', 'alreadyHasStore'], ['only' => 'store']);
     }
 
     public function index()

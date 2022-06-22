@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class IsSeller
+class AlreadyHasStore
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,9 @@ class IsSeller
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user()->seller) {
+        if ($request->user()->store) {
             return response()->json([
-                'message' => 'Unable to create a store, you are not a seller.'
+                'message' => 'Unable to create a new one, you have an existing Store.'
             ], Response::HTTP_BAD_REQUEST);
         }
 
