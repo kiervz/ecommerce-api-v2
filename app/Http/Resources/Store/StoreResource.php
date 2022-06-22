@@ -16,7 +16,7 @@ class StoreResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'seller' => $this->user->seller->firstname . ' ' . $this->user->seller->lastname,
+            'seller' => @$this->user->seller->firstname . ' ' . @$this->user->seller->lastname,
             'name' => $this->name,
             'slug' => $this->slug,
             'bio' => $this->bio,

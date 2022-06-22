@@ -17,11 +17,12 @@ class IsSeller
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user()->seller) {
-            return response()->json([
-                'message' => 'Unable to create a store, you are not a seller.'
-            ], Response::HTTP_BAD_REQUEST);
+        if ($request->user()->seller) {
+            return $next($request);
         }
-        return $next($request);
+
+        return response()->json([
+            'message' => 'Unable to create a store, you are not a seller.'
+        ], Response::HTTP_BAD_REQUEST);
     }
 }

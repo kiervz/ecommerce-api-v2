@@ -33,8 +33,7 @@ class StoreController extends Controller
 
     public function store(StoreStoreRequest $request)
     {
-
-        $store = Auth::user()->store()->create($request->validated());
+        $store = $request->user()->store()->create($request->validated());
 
         return $this->customResponse('Store created successfully!', new StoreResource($store), Response::HTTP_CREATED);
     }

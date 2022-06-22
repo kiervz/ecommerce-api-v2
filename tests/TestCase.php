@@ -43,6 +43,19 @@ abstract class TestCase extends BaseTestCase
         return $user;
     }
 
+    public function authUserAs($role_id)
+    {
+        $user = $this->createUser(['role_id' => $role_id]);
+
+        if ($role_id === User::USER_ROLE_SELLER) {
+            $this->createSeller(['user_id' => $user->id]);
+        }
+        // TODO: another condition for user role admin and customer
+        Sanctum::actingAs($user);
+
+        return $user;
+    }
+
     public function createSegment($args = [])
     {
         return Segment::factory()->create($args);

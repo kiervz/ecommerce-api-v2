@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,8 +16,8 @@ class StoreTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->authUser();
         $this->createStores(10);
+        $this->authUserAs(User::USER_ROLE_SELLER);
         $this->store = $this->createStore();
     }
 
@@ -36,7 +37,6 @@ class StoreTest extends TestCase
     public function test_if_can_create_store()
     {
         $this->post(route('store.store'), [
-            'user_id' => $this->createSeller()->id,
             'name' => 'Microsoft',
             'bio' => 'sample bio'
         ])->assertCreated();
@@ -47,7 +47,6 @@ class StoreTest extends TestCase
     public function test_can_update_store()
     {
         $this->put(route('store.update', ['store' => $this->store]), [
-            'user_id' => $this->createSeller()->id,
             'name' => 'Apple Inc.',
             'bio' => 'sample bio'
         ])->assertOk();
