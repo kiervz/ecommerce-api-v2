@@ -27,8 +27,6 @@ class LoginController extends Controller
                 'token_type' => 'Bearer',
                 'token' => $user->createToken('authToken')->plainTextToken
             ];
-
-            $user->createToken('authToken')->plainTextToken;
         } else {
             return $this->customResponse('Login Failed', [], Response::HTTP_UNAUTHORIZED, false);
         }
