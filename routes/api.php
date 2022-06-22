@@ -4,6 +4,7 @@ use App\Http\Controllers\API\V1\Auth\LoginController;
 use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\Auth\VerificationController;
 use App\Http\Controllers\API\V1\BrandController;
+use App\Http\Controllers\API\V1\CartController;
 use App\Http\Controllers\API\V1\CategoryController;
 use App\Http\Controllers\API\V1\ProductController;
 use App\Http\Controllers\API\V1\SegmentController;
@@ -47,5 +48,6 @@ Route::group(['prefix' => 'v1'], function() {
         Route::apiResource('brand', BrandController::class);
         Route::apiResource('product', ProductController::class);
         Route::apiResource('store', StoreController::class);
+        Route::apiResource('cart', CartController::class)->except(['show']);
     });
 });
