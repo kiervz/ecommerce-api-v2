@@ -7,6 +7,7 @@ use App\Http\Controllers\API\V1\BrandController;
 use App\Http\Controllers\API\V1\CategoryController;
 use App\Http\Controllers\API\V1\ProductController;
 use App\Http\Controllers\API\V1\SegmentController;
+use App\Http\Controllers\API\V1\StoreController;
 use App\Http\Controllers\API\V1\SubCategoryController;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Request;
@@ -45,5 +46,6 @@ Route::group(['prefix' => 'v1'], function() {
         Route::apiResource('sub-category', SubCategoryController::class);
         Route::apiResource('brand', BrandController::class);
         Route::apiResource('product', ProductController::class);
+        Route::apiResource('store', StoreController::class);
     });
 });

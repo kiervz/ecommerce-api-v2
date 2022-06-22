@@ -21,4 +21,9 @@ class Seller extends Model
         "address",
         "is_verified"
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
