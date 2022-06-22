@@ -16,11 +16,10 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreignIdFor(Seller::class, 'seller_id');
+            $table->foreignIdFor(Seller::class, 'user_id');
             $table->string('name', 191);
             $table->string('slug', 191);
             $table->longText('bio');
-            $table->timestamp('last_log')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -24,10 +24,8 @@ class StoreUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'seller_id' => 'required|integer',
             'name' => 'required|string|unique:stores,name,'.$this->store->id,
-            'bio' => 'string',
-            'last_log' => 'date',
+            'bio' => 'string'
         ];
     }
 }

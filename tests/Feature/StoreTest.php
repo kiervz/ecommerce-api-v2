@@ -36,10 +36,9 @@ class StoreTest extends TestCase
     public function test_if_can_create_store()
     {
         $this->post(route('store.store'), [
-            'seller_id' => $this->createSeller()->id,
+            'user_id' => $this->createSeller()->id,
             'name' => 'Microsoft',
-            'bio' => 'sample bio',
-            'last_log' => now()
+            'bio' => 'sample bio'
         ])->assertCreated();
 
         $this->assertDatabaseHas('stores', ['name' => 'Microsoft']);
@@ -48,10 +47,9 @@ class StoreTest extends TestCase
     public function test_can_update_store()
     {
         $this->put(route('store.update', ['store' => $this->store]), [
-            'seller_id' => $this->createSeller()->id,
+            'user_id' => $this->createSeller()->id,
             'name' => 'Apple Inc.',
-            'bio' => 'sample bio',
-            'last_log' => now()
+            'bio' => 'sample bio'
         ])->assertOk();
 
         $this->assertDatabaseHas('stores', ['name' => 'Apple Inc.']);

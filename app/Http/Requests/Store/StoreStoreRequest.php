@@ -24,10 +24,8 @@ class StoreStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'seller_id' => 'required|integer',
             'name' => 'required|string|unique:stores,name',
-            'bio' => 'string',
-            'last_log' => 'date',
+            'bio' => 'string'
         ];
     }
 }

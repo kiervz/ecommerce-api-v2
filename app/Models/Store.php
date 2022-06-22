@@ -12,11 +12,10 @@ class Store extends Model
     use HasFactory, SoftDeletes, Sluggable;
 
     protected $fillable = [
-        'seller_id',
+        'user_id',
         'name',
         'slug',
-        'bio',
-        'last_log',
+        'bio'
     ];
 
     /**
@@ -43,8 +42,8 @@ class Store extends Model
         return 'slug';
     }
 
-    public function seller()
+    public function user()
     {
-        return $this->hasOne(Seller::class, 'id', 'seller_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

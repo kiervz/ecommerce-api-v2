@@ -16,11 +16,11 @@ class StoreResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'seller' => $this->seller->firstname . ' ' . $this->seller->lastname,
+            'seller' => $this->user->seller->firstname . ' ' . $this->user->seller->lastname,
             'name' => $this->name,
             'slug' => $this->slug,
             'bio' => $this->bio,
-            'last_log' => $this->last_log
+            'created_at' => $this->created_at->format('Y-m-d H:i:s')
         ];
     }
 }

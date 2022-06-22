@@ -22,11 +22,10 @@ class StoreFactory extends Factory
         $slug = Str::slug($name);
 
         return [
-            'seller_id' => $this->faker->randomDigitNotZero(),
+            'user_id' => $this->faker->randomDigitNotZero(),
             'name' => $name,
             'slug' => $slug,
-            'bio' => $this->faker->text(100),
-            'last_log' => $this->faker->date
+            'bio' => $this->faker->text(100)
         ];
     }
 }
