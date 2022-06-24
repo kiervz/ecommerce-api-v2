@@ -4,6 +4,8 @@ use App\Http\Controllers\API\V1\Auth\LoginController;
 use App\Http\Controllers\API\V1\Auth\RegisterController;
 use App\Http\Controllers\API\V1\Auth\VerificationController;
 use App\Http\Controllers\API\V1\BrandController;
+use App\Http\Controllers\API\V1\CartController;
+use App\Http\Controllers\API\V1\CartItemController;
 use App\Http\Controllers\API\V1\CategoryController;
 use App\Http\Controllers\API\V1\ProductController;
 use App\Http\Controllers\API\V1\SegmentController;
@@ -40,12 +42,20 @@ Route::post('/v1/auth/login', [LoginController::class, 'login'])->name('auth.log
 Route::group(['prefix' => 'v1'], function() {
     Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::apiResource('segment', SegmentController::class);
-        Route::get('segment/{segment}/categories', [SegmentController::class, 'getCategoriesBySegment'])->name('segment.getCategoriesBySegment');
+        Route::get('segment/{segment}/categories', [SegmentController::class, 'getCategoriesBySegment'])
+            ->name('segment.getCategoriesBySegment');
         Route::apiResource('category', CategoryController::class);
-        Route::get('category/{category}/sub-categories', [CategoryController::class, 'getSubCategoriesByCategory'])->name('category.getSubCategoriesByCategory');
+        Route::get('category/{category}/sub-categories', [CategoryController::class, 'getSubCategoriesByCategory'])
+            ->name('category.getSubCategoriesByCategory');
         Route::apiResource('sub-category', SubCategoryController::class);
         Route::apiResource('brand', BrandController::class);
         Route::apiResource('product', ProductController::class);
         Route::apiResource('store', StoreController::class);
+        Route::apiResource('cart', CartController::class)
+            ->except(['show', 'update']);
+        Route::put('cart-item', [CartController::class, 'updateCartItem'])
+            ->name('cart-item.updateCartItem');
+        Route::delete('cart-item', [CartController::class, 'deleteCartItem'])
+            ->name('cart-item.deleteCartItem');
     });
 });

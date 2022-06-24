@@ -4,6 +4,8 @@ namespace Tests;
 
 use App\Models\Admin;
 use App\Models\Brand;
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Segment;
@@ -124,5 +126,18 @@ abstract class TestCase extends BaseTestCase
     public function createSellers($total)
     {
         return Seller::factory($total)->create();
+    }
+
+    public function createCart($args = [])
+    {
+        $cart = Cart::factory()->create($args);
+        $this->createCartItem($cart->id);
+
+        return $cart;
+    }
+
+    public function createCartItem($cart_id, $total = 2)
+    {
+        return CartItem::factory($total)->create(['cart_id' => $cart_id]);
     }
 }
