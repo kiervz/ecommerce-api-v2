@@ -41,7 +41,7 @@ class CartTest extends TestCase
 
     public function test_can_update_specific_cart_item()
     {
-        $this->put(route('cart-item.update', $this->cart->cartItems[0]), [
+        $this->put(route('cart-item.updateCartItem', $this->cart->cartItems[0]), [
             'cart_item_id' => $this->cart->cartItems[0]->id,
             'qty' => 33
         ])->assertOk();
@@ -53,7 +53,7 @@ class CartTest extends TestCase
     {
         $cart_item = $this->cart->cartItems[0];
 
-        $this->delete(route('cart-item.destroy', $cart_item))
+        $this->delete(route('cart-item.deleteCartItem'), ["cart_item_id" => [$cart_item->id]])
             ->assertNoContent();
 
         $this->assertDatabaseMissing('cart_items', ['id' => $cart_item->id]);

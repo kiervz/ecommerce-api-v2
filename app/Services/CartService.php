@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Cart;
+use App\Models\CartItem;
 
 class CartService
 {
@@ -28,6 +29,28 @@ class CartService
 
             return $cart;
         }
+    }
 
+    public function updateCartItem($request)
+    {
+        $cart_item = CartItem::where('id', $request['cart_item_id'])->first();
+
+        if ($cart_item) {
+            $cart_item->update(['qty' => $request['qty']]);
+        }
+
+        return $cart_item;
+    }
+
+    public function deleteCartitem($request)
+    {
+        if ($request['cart_id']) {
+            $cart = Cart::where('id', $request['cart_id'])->first();
+            $cart->cartItems->each->delete();
+            $cart->delete();
+        } else {
+            $cart_items = CartItem::whereIn('id', $request['cart_item_id'])->get();
+            $cart_items->each->delete();
+        }
     }
 }
