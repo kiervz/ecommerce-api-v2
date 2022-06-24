@@ -38,4 +38,14 @@ class CartTest extends TestCase
         $this->assertDatabaseCount('carts', 2);
         $this->assertDatabaseCount('cart_items', 3);
     }
+
+    public function test_can_update_specific_cart_item()
+    {
+        $this->put(route('cart-item.update', $this->cart->cartItems[0]), [
+            'cart_item_id' => $this->cart->cartItems[0]->id,
+            'qty' => 33
+        ])->assertOk();
+
+        $this->assertDatabaseHas('cart_items', ['qty' => 33]);
+    }
 }
