@@ -48,4 +48,14 @@ class CartTest extends TestCase
 
         $this->assertDatabaseHas('cart_items', ['qty' => 33]);
     }
+
+    public function test_can_delete_specific_cart_item()
+    {
+        $cart_item = $this->cart->cartItems[0];
+
+        $this->delete(route('cart-item.destroy', $cart_item))
+            ->assertNoContent();
+
+        $this->assertDatabaseMissing('cart_items', ['id' => $cart_item->id]);
+    }
 }

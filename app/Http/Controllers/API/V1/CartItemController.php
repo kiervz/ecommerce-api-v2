@@ -16,4 +16,11 @@ class CartItemController extends Controller
 
         return $this->customResponse('updated cart successfully!', [], Response::HTTP_OK);
     }
+
+    public function destroy(CartItem $cart_item)
+    {
+        $cart_item->delete();
+
+        return $this->customResponse('deleted cart item successfully!', [], Response::HTTP_NO_CONTENT);
+    }
 }
