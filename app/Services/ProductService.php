@@ -10,7 +10,8 @@ use Auth;
 
 class ProductService
 {
-    public function showProducts($sort, $search)
+
+    public function showAllProducts($sort, $search)
     {
         $search_products = Product::where(function($query) use ($search) {
             $query->where('slug', 'LIKE', "%$search%")

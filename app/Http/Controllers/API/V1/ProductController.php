@@ -21,19 +21,17 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $sort = $request->get('sort');
-        $search = $request->get('q');
+        $products = auth()->user()->seller->products()->paginate(30);
 
-        $products = $this->productService->showProducts($sort, $search);
 
         return $this->customResponse('results', new ProductCollection($products));
     }
 
     public function show(Product $product)
     {
-        return $this->customResponse('Product fetch successfully!', $product);
+        return $this->customResponse('Product fetch successfully!', new ProductResource($product));
     }
 
     public function store(ProductStoreRequest $request)

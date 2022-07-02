@@ -16,11 +16,7 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'seller' => $this->seller,
-            'brand' => $this->brand->name,
-            'segment' => $this->segment->name,
-            'category' => $this->category->name,
-            'subCategory' => $this->subCategory->name,
+            'id' => $this->id,
             'sku' => $this->sku,
             'name' => $this->name,
             'slug' => $this->slug,
@@ -29,7 +25,27 @@ class ProductResource extends JsonResource
             'actual_price' => number_format($this->actual_price, 2),
             'stock' => $this->stock,
             'description' => $this->description,
-            'productImages' => ProductImageResource::collection($this->productImages)
+            'productImages' => ProductImageResource::collection($this->productImages),
+            'seller' => [
+                'id' => $this->seller->id,
+                'name' => $this->seller->firstname . ' ' . $this->seller->lastname
+            ],
+            'brand' => [
+                'id' => $this->brand->id,
+                'name' => $this->brand->name
+            ],
+            'segment' => [
+                'id' => $this->segment->id,
+                'name' => $this->segment->name
+            ],
+            'category' => [
+                'id' => $this->category->id,
+                'name' => $this->category->name
+            ],
+            'subCategory' => [
+                'id' => $this->subCategory->id,
+                'name' => $this->subCategory->name
+            ],
         ];
     }
 }
