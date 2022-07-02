@@ -19,7 +19,7 @@ class IsSeller
     {
         if (!$request->user()->seller) {
             return response()->json([
-                'message' => 'Unable to create a store, you are not a seller.'
+                'message' => 'You don\'t have permission to access this module, please refer to your system administrator.'
             ], Response::HTTP_BAD_REQUEST);
         }
 

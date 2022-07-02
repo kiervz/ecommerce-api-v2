@@ -18,11 +18,7 @@ class ProductCollection extends ResourceCollection
         return [
             'data' => $this->collection->transform(function($request) {
                 return [
-                    'seller' => $request->seller,
-                    'brand' => $request->brand->name,
-                    'segment' => $request->segment->name,
-                    'category' => $request->category->name,
-                    'subCategory' => $request->subCategory->name,
+                    'id' => $request->id,
                     'sku' => $request->sku,
                     'name' => $request->name,
                     'slug' => $request->slug,
@@ -31,7 +27,27 @@ class ProductCollection extends ResourceCollection
                     'actual_price' => number_format($request->actual_price, 2),
                     'stock' => $request->stock,
                     'description' => $request->description,
-                    'productImages' => ProductImageResource::collection($request->productImages)
+                    'productImages' => ProductImageResource::collection($request->productImages),
+                    'seller' => [
+                        'id' => $request->seller->id,
+                        'name' => $request->seller->firstname . ' ' . $request->seller->lastname
+                    ],
+                    'brand' => [
+                        'id' => $request->brand->id,
+                        'name' => $request->brand->name
+                    ],
+                    'segment' => [
+                        'id' => $request->segment->id,
+                        'name' => $request->segment->name
+                    ],
+                    'category' => [
+                        'id' => $request->category->id,
+                        'name' => $request->category->name
+                    ],
+                    'subCategory' => [
+                        'id' => $request->subCategory->id,
+                        'name' => $request->subCategory->name
+                    ]
                 ];
             }),
             'meta' => [

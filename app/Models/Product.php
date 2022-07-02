@@ -73,7 +73,7 @@ class Product extends Model
 
     public function seller()
     {
-        return $this->hasOne(Seller::class, 'id', 'seller_id');
+        return $this->belongsTo(Seller::class);
     }
 
     public function brand()
