@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Product\ProductCollection;
+use App\Http\Resources\Product\ProductResource;
+use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -22,5 +24,10 @@ class ShopController extends Controller
         $products = $this->productService->showAllProducts($sort, $search);
 
         return $this->customResponse('results', new ProductCollection($products));
+    }
+
+    public function showProduct(Product $product)
+    {
+        return $this->customResponse('Product fetch successfully!', new ProductResource($product));
     }
 }

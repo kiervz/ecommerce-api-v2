@@ -41,6 +41,7 @@ Route::post('/v1/auth/register', [RegisterController::class, 'register'])->name(
 Route::post('/v1/auth/login', [LoginController::class, 'login'])->name('auth.login');
 
 Route::get('/v1/shop', [ShopController::class, 'showAllProducts'])->name('shop.showAllProducts');
+Route::get('/v1/shop/{product}', [ShopController::class, 'showProduct'])->name('shop.showProduct');
 
 Route::group(['prefix' => 'v1'], function() {
     Route::group(['middleware' => 'auth:sanctum'], function() {

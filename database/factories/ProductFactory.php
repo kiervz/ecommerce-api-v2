@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Segment;
+use App\Models\Seller;
 use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +22,9 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'seller_id' => 1, // TODO: make factory for seller
+            'seller_id' => function() {
+                return Seller::factory()->create()->id;
+            },
             'brand_id' => function() {
                 return Brand::factory()->create()->id;
             },
