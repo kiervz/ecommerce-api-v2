@@ -9,6 +9,7 @@ use App\Http\Controllers\API\V1\CartItemController;
 use App\Http\Controllers\API\V1\CategoryController;
 use App\Http\Controllers\API\V1\ProductController;
 use App\Http\Controllers\API\V1\SegmentController;
+use App\Http\Controllers\API\V1\ShopController;
 use App\Http\Controllers\API\V1\StoreController;
 use App\Http\Controllers\API\V1\SubCategoryController;
 use App\Http\Resources\User\UserResource;
@@ -38,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('/v1/auth/register', [RegisterController::class, 'register'])->name('auth.register');
 Route::post('/v1/auth/login', [LoginController::class, 'login'])->name('auth.login');
+
+Route::get('/v1/shop', [ShopController::class, 'showAllProducts'])->name('shop.showAllProducts');
 
 Route::group(['prefix' => 'v1'], function() {
     Route::group(['middleware' => 'auth:sanctum'], function() {
