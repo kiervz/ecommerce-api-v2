@@ -3,9 +3,10 @@
 namespace App\Services;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Storage;
 use Auth;
+use Image;
 
 class ProductService
 {
@@ -43,15 +44,15 @@ class ProductService
         foreach ($product_images as $item) {
             $extension = $item->getClientOriginalExtension();
 
-            $new_img_name = Auth::id() . rand(0, 100) . time() . '.' . $extension;
+            $photo_name = Auth::id() . rand(0, 100) . time() . '.' . $extension;
 
-            $old_img_name = Storage::disk('public')->put('/', $item);
+            $img = Image::make($item);
 
-            Storage::move('public/'.$old_img_name, $new_img_name);
+            Storage::disk('s3')->put('images/'.$photo_name, $img->stream());
 
-            $product->productImages()->create([
-                'name' => $new_img_name
-            ]);
+            Storage::disk('s3')->setVisibility('images/'.$photo_name, 'public');
+
+            $product->productImages()->create(['name' => $photo_name]);
         }
     }
 }

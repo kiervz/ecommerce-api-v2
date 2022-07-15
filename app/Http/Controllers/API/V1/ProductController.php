@@ -25,7 +25,6 @@ class ProductController extends Controller
     {
         $products = auth()->user()->seller->products()->paginate(30);
 
-
         return $this->customResponse('results', new ProductCollection($products));
     }
 
