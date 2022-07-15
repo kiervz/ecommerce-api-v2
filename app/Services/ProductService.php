@@ -52,7 +52,9 @@ class ProductService
 
             Storage::disk('s3')->setVisibility('images/'.$photo_name, 'public');
 
-            $product->productImages()->create(['name' => $photo_name]);
+            $file_url = Storage::disk('s3')->url('images/'.$photo_name);
+
+            $product->productImages()->create(['name' => $photo_name, 'url' => $file_url]);
         }
     }
 }

@@ -18,6 +18,7 @@ class CreateProductImagesTable extends Migration
             $table->increments('id');
             $table->foreignIdFor(Product::class, 'product_id');
             $table->string('name');
+            $table->string('url');
             $table->timestamps();
         });
     }

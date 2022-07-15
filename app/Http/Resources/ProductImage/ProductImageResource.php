@@ -17,7 +17,7 @@ class ProductImageResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'url' => asset('storage/'.$this->name)
+            'url' => $this->url
         ];
     }
 }
