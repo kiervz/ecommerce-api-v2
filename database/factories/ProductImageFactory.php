@@ -18,7 +18,8 @@ class ProductImageFactory extends Factory
             'product_id' => function() {
                 return Product::factory()->create()->id;
             },
-            'name' => $this->faker->word(20, true)
+            'name' => $this->faker->word(20, true),
+            'url' => $this->faker->word(50, true)
         ];
     }
 }
