@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 
 use Auth;
@@ -13,21 +12,21 @@ class ProductService
 
     public function showAllProducts($sort, $search)
     {
-        $search_products = Product::where(function($query) use ($search) {
+        $searchProducts = Product::where(function($query) use ($search) {
             $query->where('slug', 'LIKE', "%$search%")
                 ->orWhere('name', 'LIKE', "%$search%")
                 ->orWhere('sku', 'LIKE', "%$search%");
             })->where('deleted_at', null);
 
         if ($sort === 'latest') {
-            $search_products->orderBy('created_at', 'DESC');
+            $searchProducts->orderBy('created_at', 'DESC');
         } else if ($sort === 'lowest-price') {
-            $search_products->orderBy('actual_price', 'ASC');
+            $searchProducts->orderBy('actual_price', 'ASC');
         } else if ($sort === 'highest-price') {
-            $search_products->orderBy('actual_price', 'DESC');
+            $searchProducts->orderBy('actual_price', 'DESC');
         }
 
-        return $search_products->paginate(30);
+        return $searchProducts->paginate(30);
     }
 
     public function createProduct($request)
